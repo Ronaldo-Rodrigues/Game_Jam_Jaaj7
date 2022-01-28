@@ -100,6 +100,8 @@ public class GameManager : MonoBehaviour
     public void PowerPallet(PowerPallet ppallet)
     {
         PalletEaten(ppallet);
+        CancelInvoke();
+        Invoke(nameof(ghostMultiplier), ppallet.duration);     
     }
     public bool HasPalletsRemaining()
     {
