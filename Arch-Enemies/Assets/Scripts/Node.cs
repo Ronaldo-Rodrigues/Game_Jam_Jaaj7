@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,18 +8,25 @@ public class Node : MonoBehaviour
 
     private void Start()
     {
-        this.availableDirections = new List<Vector2>();
-        CheckAvailableDir(Vector2.up);
-        CheckAvailableDir(Vector2.left);
-        CheckAvailableDir(Vector2.right);
-        CheckAvailableDir(Vector2.down);
+        availableDirections = new List<Vector2>();
+
+        // We determine if the direction is available by box casting to see if
+        // we hit a wall. The direction is added to list if available.
+        CheckAvailableDirection(Vector2.up);
+        CheckAvailableDirection(Vector2.down);
+        CheckAvailableDirection(Vector2.left);
+        CheckAvailableDirection(Vector2.right);
     }
-    private void CheckAvailableDir(Vector2 direction)
-    {       
-        RaycastHit2D hit = Physics2D.BoxCast(this.transform.position, Vector2.one * 0.5f, 0.0f, direction, 1f, this.obstacleLayer);
+
+    private void CheckAvailableDirection(Vector2 direction)
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.5f, 0f, direction, 1f, obstacleLayer);
+
+        // If no collider is hit then there is no obstacle in that direction
         if (hit.collider == null)
         {
-            this.availableDirections.Add(direction);
+            availableDirections.Add(direction);
         }
     }
+
 }

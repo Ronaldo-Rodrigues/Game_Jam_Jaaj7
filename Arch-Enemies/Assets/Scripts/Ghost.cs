@@ -29,9 +29,9 @@ public class Ghost : MonoBehaviour
     }
     public void ResetState()
     {
-        this.movement.ResetState();
+       
         this.gameObject.SetActive(true);
-
+        this.movement.ResetState();
         this.fright.Disable();
         this.chase.Disable();
         this.scatter.Enable();
@@ -47,9 +47,16 @@ public class Ghost : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void SetPosition(Vector3 position)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Pacman"))
+        // Keep the z-position the same since it determines draw depth
+        position.z = transform.position.z;
+        transform.position = position;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Pacman"))
         {
             if (this.fright.enabled)
             {

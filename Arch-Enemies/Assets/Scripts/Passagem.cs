@@ -10,11 +10,11 @@ public class Passagem : MonoBehaviour
         {
             if (other.transform.position.x > 1)
             {
-                other.transform.position = new Vector3(-13.5f, transform.position.y, transform.position.z);
+                other.transform.position = new Vector3(-13.5f, transform.position.y,-3);
             }
             else if(other.transform.position.x < -1) 
             {
-                other.transform.position = new Vector3(13.5f, transform.position.y, transform.position.z);
+                other.transform.position = new Vector3(13.5f, transform.position.y,-3);
             }
         }
     }
